@@ -243,7 +243,8 @@ public class CameraVieActivity extends AppCompatActivity {
             sourceBitmap = image;
             if (Utils.checkRotate(this.sourceBitmap))
                 sourceBitmap = Utils.rotateBitmap(this.sourceBitmap, 90);
-            cropBitmap = Bitmap.createScaledBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE, TF_OD_API_INPUT_SIZE, true);
+            // cropBitmap = Bitmap.createScaledBitmap(sourceBitmap, TF_OD_API_INPUT_SIZE, TF_OD_API_INPUT_SIZE, true);
+            cropBitmap = Utils.processBitmap(sourceBitmap,TF_OD_API_INPUT_SIZE);
             Toast.makeText(CameraVieActivity.this, "Cumming" , Toast.LENGTH_SHORT).show();
 
             //Log.d("debug", "V cropped_width: " + cropBitmap.getWidth() + " cropped_height: " + cropBitmap.getHeight());
@@ -303,7 +304,8 @@ public class CameraVieActivity extends AppCompatActivity {
             HashMap<Float, String> classes = new HashMap<>();
             Bitmap croppedOdometer = Utils.cropImage(sourceBitmap, cropBitmap, odometerCoors); //crop out the odometer region
             Log.d("debug", "cropped_width: " + croppedOdometer.getWidth() + " cropped_height: " + croppedOdometer.getHeight());
-            croppedOdometer = Bitmap.createScaledBitmap(croppedOdometer, TF_OD_API_INPUT_SIZE, TF_OD_API_INPUT_SIZE, true); //resize img
+            // croppedOdometer = Bitmap.createScaledBitmap(croppedOdometer, TF_OD_API_INPUT_SIZE, TF_OD_API_INPUT_SIZE, true); //resize img
+            croppedOdometer = Utils.processBitmap(croppedOdometer,TF_OD_API_INPUT_SIZE);
             List<Classifier.Recognition> resultsDigit = detector.recognizeImage(croppedOdometer);
 
             croped=croppedOdometer;
